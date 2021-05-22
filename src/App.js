@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -8,6 +8,7 @@ import "./App.css";
 
 function App() {
   let mount = useRef(null);
+  const [loaded, setLoaded] = useState(0);
 
   useEffect(() => {
     if (!mount.current) {
@@ -51,7 +52,7 @@ function App() {
           scene.add(gltf.scene);
         },
         function (xhr) {
-          console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+          setLoaded(xhr.loaded / (1024 * 1024));
         },
         function (error) {
           console.error(error);
@@ -74,6 +75,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1 className="header">{loaded.toFixed(2)} MB loaded</h1>
       <div className="canvas" ref={(ref) => (mount = ref)} />
     </div>
   );

@@ -8,3 +8,12 @@
   top: 0;
   left: 0;
 }
+
+.header {
+  position: fixed;
+  z-index: 1000;
+  top: "10px";
+  left: "10px";
+  color: white;
+  margin: 20px;
+}
